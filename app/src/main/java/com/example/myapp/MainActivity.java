@@ -25,8 +25,11 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
     }
     public void onClickActivity(View view){
+        String email = editMail.getText().toString();
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.putExtra("user_email", email);
+
         startActivity(intent);
     }
 // public void onButtonClick(View view){
