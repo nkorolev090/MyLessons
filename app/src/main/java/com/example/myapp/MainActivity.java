@@ -13,24 +13,39 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
-    EditText editMail;
+    EditText name;
+    EditText surname;
+
+    User newUser;
     TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        editMail = findViewById(R.id.editTextTextEmailAddress);
+        name = findViewById(R.id.editTextName);
+        surname = findViewById(R.id.editTextSurname);
         textView = findViewById(R.id.textView);
     }
     public void onClickActivity(View view){
-        String email = editMail.getText().toString();
+        String str_name = name.getText().toString();
+        String str_surname = surname.getText().toString();
+
+        if(str_name.length() != 0 && str_surname.length() != 0){
         Intent intent = new Intent(this, SecondActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.putExtra("user_email", email);
+        intent.putExtra("name", str_name);
+        intent.putExtra("surname", str_surname);
 
         startActivity(intent);
+        }
+        else {
+            Toast.makeText(this, "Заполните поля", Toast.LENGTH_SHORT).show();
+        }
+
     }
 // public void onButtonClick(View view){
 // String email = editMail.getText().toString();

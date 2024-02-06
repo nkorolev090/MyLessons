@@ -14,13 +14,15 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
         Bundle argument = getIntent().getExtras();
 
         textHello = findViewById(R.id.textViewHello);
         if(argument != null) {
-        String email = argument.getString("user_email");
+        String name = argument.getString("name");
+        String surname = argument.get("surname").toString();
 
-        textHello.append(email);
+        textHello.setText("Добро пожаловать, " + name + " " + surname);
         }
     }
     public void onClickButton(View view){
