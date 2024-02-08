@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     EditText name;
     EditText surname;
 
+    List<User> users;
 
     User newUser;
     TextView textView;
@@ -31,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.editTextName);
         surname = findViewById(R.id.editTextSurname);
         textView = findViewById(R.id.textView);
+        users = new ArrayList<>();
+//        users.add(new User("name", "surname"));
+//        users.add(new User("name1", "surname1"));
+//        users.add(new User("name2", "surname2"));
     }
     public void onClickActivity(View view){
         String str_name = name.getText().toString();
@@ -42,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("name", str_name);
         intent.putExtra("surname", str_surname);
 
-        startActivity(intent);
+        users.add(new User(str_name, str_surname));
+            for (User user: users
+                 ) {
+                Log.d("Main", user.getName() + " " + user.getSurname());
+            }
+
+        //startActivity(intent);
         }
         else {
             Toast.makeText(this, "Заполните поля", Toast.LENGTH_SHORT).show();
