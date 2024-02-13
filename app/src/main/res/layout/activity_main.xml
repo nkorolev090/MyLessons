@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Base.Theme.MyApp"
     tools:context=".MainActivity">
 
     <TextView
@@ -49,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="200dp"
-        android:text="New User? metanit.com"
         android:autoLink="web"
+        android:text="New User? metanit.com"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,10 +62,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="Зарегистрироваться"
         android:onClick="onClickActivity"
+        android:text="Зарегистрироваться"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSurname" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/search_new" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
