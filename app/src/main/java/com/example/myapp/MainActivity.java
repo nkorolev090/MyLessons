@@ -46,16 +46,18 @@ public class MainActivity extends AppCompatActivity {
         if(str_name.length() != 0 && str_surname.length() != 0){
         Intent intent = new Intent(this, SecondActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.putExtra("name", str_name);
-        intent.putExtra("surname", str_surname);
+        User user = new User(str_name, str_surname);
+//        intent.putExtra("name", str_name);
+//        intent.putExtra("surname", str_surname);
+        intent.putExtra("user", user);
 
-        users.add(new User(str_name, str_surname));
-            for (User user: users
-                 ) {
-                Log.d("Main", user.getName() + " " + user.getSurname());
-            }
+//        users.add(new User(str_name, str_surname));
+//            for (User user: users
+//                 ) {
+//                Log.d("Main", user.getName() + " " + user.getSurname());
+//            }
 
-        //startActivity(intent);
+        startActivity(intent);
         }
         else {
             Toast.makeText(this, "Заполните поля", Toast.LENGTH_SHORT).show();
