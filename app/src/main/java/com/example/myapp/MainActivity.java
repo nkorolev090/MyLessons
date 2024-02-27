@@ -2,6 +2,8 @@ package com.example.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +22,8 @@ import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText name;
-    EditText surname;
+    EditText nameEdit;
+    EditText surnameEdit;
 
     List<User> users;
 
@@ -31,17 +33,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        name = findViewById(R.id.editTextName);
-        surname = findViewById(R.id.editTextSurname);
+        nameEdit = findViewById(R.id.editTextName);
+        surnameEdit = findViewById(R.id.editTextSurname);
         textView = findViewById(R.id.textView);
         users = new ArrayList<>();
+
+        LoadFromDb();
 //        users.add(new User("name", "surname"));
 //        users.add(new User("name1", "surname1"));
 //        users.add(new User("name2", "surname2"));
     }
     public void onClickActivity(View view){
-        String str_name = name.getText().toString();
-        String str_surname = surname.getText().toString();
+        String str_name = nameEdit.getText().toString();
+        String str_surname = surnameEdit.getText().toString();
 
         if(str_name.length() != 0 && str_surname.length() != 0){
         Intent intent = new Intent(this, SecondActivity.class);
@@ -63,6 +67,23 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Заполните поля", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public  void LoadFromDb(){
+        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS users (name TEXT, surname TEXT, UNIQUE(name))");
+        db.execSQL("INSERT OR IGNORE INTO users VALUES ('Никита', 'Королев'), ('Иван', 'Крайнов'), ('Матвей', 'Левашов') ;");
+
+        Cursor query = db.rawQuery("SELECT * FROM users;", null);
+
+        if(query.moveToFirst()){
+            String name = query.getString(0);
+            String surname = query.getString(1);
+            nameEdit.setText(name);
+            surnameEdit.setText(surname);
+        }
+        query.close();
+        db.close();
     }
 // public void onButtonClick(View view){
 // String email = editMail.getText().toString();
