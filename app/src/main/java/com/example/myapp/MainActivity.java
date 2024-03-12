@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     User newUser;
     TextView textView;
+
+//    ListView userList;
+    TextView header;
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase db;
+    Cursor userCursor;
+    SimpleCursorAdapter userAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +46,9 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         users = new ArrayList<>();
 
-        LoadFromDb();
-//        users.add(new User("name", "surname"));
-//        users.add(new User("name1", "surname1"));
-//        users.add(new User("name2", "surname2"));
+
+        //LoadFromDb();
+
     }
     public void onClickActivity(View view){
         String str_name = nameEdit.getText().toString();
@@ -51,15 +58,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SecondActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         User user = new User(str_name, str_surname);
-//        intent.putExtra("name", str_name);
-//        intent.putExtra("surname", str_surname);
         intent.putExtra("user", user);
-
-//        users.add(new User(str_name, str_surname));
-//            for (User user: users
-//                 ) {
-//                Log.d("Main", user.getName() + " " + user.getSurname());
-//            }
 
         startActivity(intent);
         }
